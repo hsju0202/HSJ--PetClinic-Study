@@ -21,14 +21,15 @@ public class OwnerSearchRepository {
 
     public List<Owner> find(OwnerRequestDTO.Condition condition) {
         return queryFactory
-                .selectFrom(owner)
-                .where(ownerIdIn(condition.getIds())                )
-                .fetch();
+            .selectFrom(owner)
+            .where(ownerIdIn(condition.getIds()))
+            .fetch();
     }
 
     private BooleanExpression ownerIdIn(List<Long> ids) {
-        if (CollectionUtils.isEmpty(ids))
+        if (CollectionUtils.isEmpty(ids)) {
             return null;
+        }
 
         return owner.id.in(ids);
     }

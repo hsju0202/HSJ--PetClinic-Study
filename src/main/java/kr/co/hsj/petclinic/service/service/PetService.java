@@ -28,14 +28,15 @@ public class PetService {
 
     @Transactional
     public void create(PetRequestDTO.Create createDTO) {
-        Owner owner = ownerRepository.findById(createDTO.getOwnerId()).orElseThrow(() -> new EntityNotFoundException("Owner Not Found"));
+        Owner owner = ownerRepository.findById(createDTO.getOwnerId())
+                                     .orElseThrow(() -> new EntityNotFoundException("Owner Not Found"));
 
         Pet pet = Pet.builder()
-                .owner(owner)
-                .birthDate(createDTO.getBirthDate())
-                .name(createDTO.getName())
-                .petType(createDTO.getPetType())
-                .build();
+                     .owner(owner)
+                     .birthDate(createDTO.getBirthDate())
+                     .name(createDTO.getName())
+                     .petType(createDTO.getPetType())
+                     .build();
 
         petRepository.save(pet);
     }
@@ -44,13 +45,14 @@ public class PetService {
         List<Pet> pets = petSearchRepository.find(conditionDTO);
 
         return pets.stream()
-                .map(mapper::toReadDTO)
-                .collect(Collectors.toList());
+                   .map(mapper::toReadDTO)
+                   .collect(Collectors.toList());
     }
 
     @Transactional
     public void update(PetRequestDTO.Update updateDTO) {
-        Pet pet = petRepository.findById(updateDTO.getId()).orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
+        Pet pet = petRepository.findById(updateDTO.getId())
+                               .orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
         pet.update(updateDTO);
     }
 

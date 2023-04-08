@@ -23,15 +23,16 @@ public class VisitSearchRepository {
 
     public List<Visit> find(VisitRequestDTO.Condition condition) {
         return queryFactory
-                .selectFrom(visit)
-                .join(pet).fetchJoin()
-                .where(visitIdIn(condition.getIds()))
-                .fetch();
+            .selectFrom(visit)
+            .join(pet).fetchJoin()
+            .where(visitIdIn(condition.getIds()))
+            .fetch();
     }
 
     private BooleanExpression visitIdIn(List<Long> ids) {
-        if (CollectionUtils.isEmpty(ids))
+        if (CollectionUtils.isEmpty(ids)) {
             return null;
+        }
 
         return visit.id.in(ids);
     }

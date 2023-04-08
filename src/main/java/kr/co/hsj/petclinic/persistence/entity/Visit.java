@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tbl_visits")
 @AttributeOverride(
-        name = "id",
-        column = @Column(name = "visit_id")
+    name = "id",
+    column = @Column(name = "visit_id")
 )
 @Getter
 @NoArgsConstructor

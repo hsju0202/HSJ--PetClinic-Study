@@ -13,6 +13,7 @@ public class VisitRequestDTO {
 
         private List<Long> ids;
     }
+
     @Getter
     @AllArgsConstructor
     public static class Create {

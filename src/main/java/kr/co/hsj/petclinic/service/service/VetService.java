@@ -1,5 +1,7 @@
 package kr.co.hsj.petclinic.service.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import kr.co.hsj.petclinic.infra.exception.EntityNotFoundException;
 import kr.co.hsj.petclinic.persistence.entity.Vet;
 import kr.co.hsj.petclinic.persistence.repository.VetRepository;
@@ -10,9 +12,6 @@ import kr.co.hsj.petclinic.service.model.dto.response.VetResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -33,13 +32,14 @@ public class VetService {
         List<Vet> vets = vetSearchRepository.find(conditionDTO);
 
         return vets.stream()
-                .map(mapper::toReadDTO)
-                .collect(Collectors.toList());
+                   .map(mapper::toReadDTO)
+                   .collect(Collectors.toList());
     }
 
     @Transactional
     public void update(VetRequestDTO.Update updateDTO) {
-        Vet vet = vetRepository.findById(updateDTO.getId()).orElseThrow(() -> new EntityNotFoundException("Vet Not Found"));
+        Vet vet = vetRepository.findById(updateDTO.getId())
+                               .orElseThrow(() -> new EntityNotFoundException("Vet Not Found"));
         vet.update(updateDTO);
     }
 

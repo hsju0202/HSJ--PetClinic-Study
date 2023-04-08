@@ -23,15 +23,16 @@ public class PetSearchRepository {
 
     public List<Pet> find(PetRequestDTO.Condition condition) {
         return queryFactory
-                .selectFrom(pet)
-                .join(owner).fetchJoin()
-                .where(petIdIn(condition.getIds()))
-                .fetch();
+            .selectFrom(pet)
+            .join(owner).fetchJoin()
+            .where(petIdIn(condition.getIds()))
+            .fetch();
     }
 
     private BooleanExpression petIdIn(List<Long> ids) {
-        if (CollectionUtils.isEmpty(ids))
+        if (CollectionUtils.isEmpty(ids)) {
             return null;
+        }
 
         return pet.id.in(ids);
     }

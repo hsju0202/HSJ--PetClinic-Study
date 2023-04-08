@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "tbl_owners")
 @AttributeOverride(
-        name = "id",
-        column = @Column(name = "owner_id")
+    name = "id",
+    column = @Column(name = "owner_id")
 )
 @Getter
 @NoArgsConstructor

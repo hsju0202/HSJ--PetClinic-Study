@@ -28,12 +28,13 @@ public class VisitService {
 
     @Transactional
     public void create(VisitRequestDTO.Create createDTO) {
-        Pet pet = petRepository.findById(createDTO.getPetId()).orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
+        Pet pet = petRepository.findById(createDTO.getPetId())
+                               .orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
 
         Visit visit = Visit.builder()
-                .description(createDTO.getDescription())
-                .pet(pet)
-                .build();
+                           .description(createDTO.getDescription())
+                           .pet(pet)
+                           .build();
 
         visitRepository.save(visit);
     }
@@ -42,13 +43,14 @@ public class VisitService {
         List<Visit> visits = visitSearchRepository.find(conditionDTO);
 
         return visits.stream()
-                .map(mapper::toReadDTO)
-                .collect(Collectors.toList());
+                     .map(mapper::toReadDTO)
+                     .collect(Collectors.toList());
     }
 
     @Transactional
     public void update(VisitRequestDTO.Update updateDTO) {
-        Visit visit = visitRepository.findById(updateDTO.getId()).orElseThrow(() -> new EntityNotFoundException("Visit Not Found"));
+        Visit visit = visitRepository.findById(updateDTO.getId())
+                                     .orElseThrow(() -> new EntityNotFoundException("Visit Not Found"));
         visit.update(updateDTO);
     }
 

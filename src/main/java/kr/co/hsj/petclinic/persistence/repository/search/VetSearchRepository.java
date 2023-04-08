@@ -21,14 +21,15 @@ public class VetSearchRepository {
 
     public List<Vet> find(VetRequestDTO.Condition condition) {
         return queryFactory
-                .selectFrom(vet)
-                .where(vetIdIn(condition.getIds()))
-                .fetch();
+            .selectFrom(vet)
+            .where(vetIdIn(condition.getIds()))
+            .fetch();
     }
 
     private BooleanExpression vetIdIn(List<Long> ids) {
-        if (CollectionUtils.isEmpty(ids))
+        if (CollectionUtils.isEmpty(ids)) {
             return null;
+        }
 
         return vet.id.in(ids);
     }

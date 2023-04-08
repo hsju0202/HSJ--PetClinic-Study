@@ -39,7 +39,8 @@ public class OwnerService {
 
     @Transactional
     public void update(OwnerRequestDTO.Update updateDTO) {
-        Owner owner = ownerRepository.findById(updateDTO.getId()).orElseThrow(() -> new EntityNotFoundException("Owner Not Found"));
+        Owner owner = ownerRepository.findById(updateDTO.getId())
+                                     .orElseThrow(() -> new EntityNotFoundException("Owner Not Found"));
         owner.update(updateDTO);
     }
 

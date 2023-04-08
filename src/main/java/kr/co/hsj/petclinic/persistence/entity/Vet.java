@@ -10,8 +10,8 @@ import java.util.Set;
 @Entity
 @Table(name = "tbl_vets")
 @AttributeOverride(
-        name = "id",
-        column = @Column(name = "vet_id")
+    name = "id",
+    column = @Column(name = "vet_id")
 )
 @NoArgsConstructor
 public class Vet extends BaseEntity {
