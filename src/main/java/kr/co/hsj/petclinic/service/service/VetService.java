@@ -24,7 +24,12 @@ public class VetService {
 
     @Transactional
     public void create(VetRequestDTO.Create createDTO) {
-        Vet vet = new Vet(createDTO);
+        Vet vet = Vet.builder()
+                     .firstName(createDTO.getFirstName())
+                     .lastName(createDTO.getLastName())
+                     .specialties(createDTO.getSpecialties())
+                     .build();
+
         vetRepository.save(vet);
     }
 
@@ -37,9 +42,8 @@ public class VetService {
     }
 
     @Transactional
-    public void update(VetRequestDTO.Update updateDTO) {
-        Vet vet = vetRepository.findById(updateDTO.getId())
-                               .orElseThrow(() -> new EntityNotFoundException("Vet Not Found"));
+    public void update(Long id, VetRequestDTO.Update updateDTO) {
+        Vet vet = vetRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Vet Not Found"));
         vet.update(updateDTO);
     }
 

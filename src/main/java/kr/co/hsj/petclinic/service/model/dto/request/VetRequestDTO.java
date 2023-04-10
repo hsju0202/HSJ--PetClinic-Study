@@ -22,7 +22,7 @@ public class VetRequestDTO {
 
         private String firstName;
         private String lastName;
-        private Set<VetSpeciality> specialties;
+        private List<String> specialties;
     }
 
     @Getter
