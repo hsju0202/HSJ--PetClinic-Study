@@ -3,6 +3,7 @@ package kr.co.hsj.petclinic.service.service;
 import kr.co.hsj.petclinic.infra.exception.EntityNotFoundException;
 import kr.co.hsj.petclinic.persistence.entity.Owner;
 import kr.co.hsj.petclinic.persistence.entity.Pet;
+import kr.co.hsj.petclinic.persistence.entity.PetType;
 import kr.co.hsj.petclinic.persistence.repository.OwnerRepository;
 import kr.co.hsj.petclinic.persistence.repository.PetRepository;
 import kr.co.hsj.petclinic.persistence.repository.search.PetSearchRepository;
@@ -35,7 +36,7 @@ public class PetService {
                      .owner(owner)
                      .birthDate(createDTO.getBirthDate())
                      .name(createDTO.getName())
-                     .petType(createDTO.getPetType())
+                     .petType(PetType.of(createDTO.getPetType()))
                      .build();
 
         petRepository.save(pet);
@@ -50,9 +51,8 @@ public class PetService {
     }
 
     @Transactional
-    public void update(PetRequestDTO.Update updateDTO) {
-        Pet pet = petRepository.findById(updateDTO.getId())
-                               .orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
+    public void update(Long id, PetRequestDTO.Update updateDTO) {
+        Pet pet = petRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
         pet.update(updateDTO);
     }
 

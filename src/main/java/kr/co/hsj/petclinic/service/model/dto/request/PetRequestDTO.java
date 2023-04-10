@@ -23,14 +23,13 @@ public class PetRequestDTO {
         private Long ownerId;
         private LocalDate birthDate;
         private String name;
-        private PetType petType;
+        private String petType;
     }
 
     @Getter
     @AllArgsConstructor
     public static class Update {
 
-        private Long id;
         private LocalDate birthDate;
         private String name;
         private PetType petType;
