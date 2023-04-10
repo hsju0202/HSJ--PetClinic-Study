@@ -1,5 +1,6 @@
 package kr.co.hsj.petclinic.service.service;
 
+import kr.co.hsj.petclinic.infra.exception.AlreadyExistPhoneNumberException;
 import kr.co.hsj.petclinic.infra.exception.EntityNotFoundException;
 import kr.co.hsj.petclinic.persistence.entity.Owner;
 import kr.co.hsj.petclinic.persistence.repository.OwnerRepository;
@@ -24,8 +25,21 @@ public class OwnerService {
     private final OwnerMapper mapper;
 
     @Transactional
-    public void create(OwnerRequestDTO.Create createDTO) {
-        Owner owner = new Owner(createDTO);
+    public void create(OwnerRequestDTO.Create createDTO) throws AlreadyExistPhoneNumberException {
+        Boolean alreadyExistNumber = ownerRepository.existsByTelephone(createDTO.getTelephone());
+
+        if (alreadyExistNumber) {
+            throw new AlreadyExistPhoneNumberException("이미 가입된 휴대폰 번호입니다.");
+        }
+
+        Owner owner = Owner.builder()
+                           .firstName(createDTO.getFirstName())
+                           .lastName(createDTO.getLastName())
+                           .telephone(createDTO.getTelephone())
+                           .address(createDTO.getAddress())
+                           .city(createDTO.getCity())
+                           .build();
+
         ownerRepository.save(owner);
     }
 
@@ -38,9 +52,8 @@ public class OwnerService {
     }
 
     @Transactional
-    public void update(OwnerRequestDTO.Update updateDTO) {
-        Owner owner = ownerRepository.findById(updateDTO.getId())
-                                     .orElseThrow(() -> new EntityNotFoundException("Owner Not Found"));
+    public void update(Long id, OwnerRequestDTO.Update updateDTO) throws EntityNotFoundException {
+        Owner owner = ownerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Owner Not Found"));
         owner.update(updateDTO);
     }
 
