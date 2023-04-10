@@ -27,9 +27,8 @@ public class VisitService {
     private final VisitMapper mapper;
 
     @Transactional
-    public void create(VisitRequestDTO.Create createDTO) {
-        Pet pet = petRepository.findById(createDTO.getPetId())
-                               .orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
+    public void create(VisitRequestDTO.Create createDTO) throws EntityNotFoundException {
+        Pet pet = petRepository.findById(createDTO.getPetId()).orElseThrow(() -> new EntityNotFoundException("Pet Not Found"));
 
         Visit visit = Visit.builder()
                            .description(createDTO.getDescription())
@@ -48,9 +47,8 @@ public class VisitService {
     }
 
     @Transactional
-    public void update(VisitRequestDTO.Update updateDTO) {
-        Visit visit = visitRepository.findById(updateDTO.getId())
-                                     .orElseThrow(() -> new EntityNotFoundException("Visit Not Found"));
+    public void update(Long id, VisitRequestDTO.Update updateDTO) {
+        Visit visit = visitRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Visit Not Found"));
         visit.update(updateDTO);
     }
 
