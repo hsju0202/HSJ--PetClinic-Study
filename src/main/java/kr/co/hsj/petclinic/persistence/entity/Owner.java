@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import kr.co.hsj.petclinic.service.model.dto.request.OwnerRequestDTO;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,12 +34,13 @@ public class Owner extends BaseEntity {
     @Column(name = "telephone")
     private String telephone;
 
-    public Owner(OwnerRequestDTO.Create createDTO) {
-        this.address = createDTO.getAddress();
-        this.city = createDTO.getCity();
-        this.firstName = createDTO.getFirstName();
-        this.lastName = createDTO.getLastName();
-        this.telephone = createDTO.getTelephone();
+    @Builder
+    public Owner(String address, String city, String firstName, String lastName, String telephone) {
+        this.address = address;
+        this.city = city;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephone = telephone;
     }
 
     public void update(OwnerRequestDTO.Update updateDTO) {

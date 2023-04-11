@@ -1,6 +1,7 @@
 package kr.co.hsj.petclinic.service.model.dto.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class OwnerRequestDTO {
     }
 
     @Getter
+    @Builder
     @AllArgsConstructor
     public static class Create {
 
@@ -26,10 +28,10 @@ public class OwnerRequestDTO {
     }
 
     @Getter
+    @Builder
     @AllArgsConstructor
-    public class Update {
+    public static class Update {
 
-        private Long id;
         private String address;
         private String city;
         private String firstName;

@@ -26,7 +26,6 @@ public class VisitRequestDTO {
     @AllArgsConstructor
     public static class Update {
 
-        private Long id;
         private String description;
     }
 
