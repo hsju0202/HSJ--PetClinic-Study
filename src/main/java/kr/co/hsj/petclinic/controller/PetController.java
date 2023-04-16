@@ -1,6 +1,10 @@
 package kr.co.hsj.petclinic.controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import kr.co.hsj.petclinic.infra.exception.EntityNotFoundException;
+import kr.co.hsj.petclinic.persistence.entity.PetType;
 import kr.co.hsj.petclinic.service.model.dto.request.PetRequestDTO;
 import kr.co.hsj.petclinic.service.service.PetService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,10 +25,31 @@ public class PetController {
 
     private final PetService petService;
 
+//    @GetMapping("/pets")
+//    public ResponseEntity<?> findPets(PetRequestDTO.Condition conditionDTO) {
+//        try {
+//            return ResponseEntity.ok(petService.find(conditionDTO));
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//        }
+//    }
+
     @GetMapping("/pets")
-    public ResponseEntity<?> findPets(PetRequestDTO.Condition conditionDTO) {
+    public ResponseEntity<?> findPets(@RequestParam Long ownerId) {
         try {
-            return ResponseEntity.ok(petService.find(conditionDTO));
+            return ResponseEntity.ok(petService.findByOwnerId(ownerId));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/pets/types")
+    public ResponseEntity<?> fetchPetTypes() {
+        try {
+            List<String> types = Arrays.stream(PetType.values())
+                                       .map(PetType::getPetType)
+                                       .collect(Collectors.toList());
+            return ResponseEntity.ok(types);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

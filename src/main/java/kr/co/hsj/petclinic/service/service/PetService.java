@@ -1,5 +1,7 @@
 package kr.co.hsj.petclinic.service.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import kr.co.hsj.petclinic.infra.exception.EntityNotFoundException;
 import kr.co.hsj.petclinic.persistence.entity.Owner;
 import kr.co.hsj.petclinic.persistence.entity.Pet;
@@ -13,9 +15,6 @@ import kr.co.hsj.petclinic.service.model.dto.response.PetResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -42,8 +41,16 @@ public class PetService {
         petRepository.save(pet);
     }
 
-    public List<PetResponseDTO.Read> find(PetRequestDTO.Condition conditionDTO) {
-        List<Pet> pets = petSearchRepository.find(conditionDTO);
+//    public List<PetResponseDTO.Read> find(PetRequestDTO.Condition conditionDTO) {
+//        List<Pet> pets = petSearchRepository.find(conditionDTO);
+//
+//        return pets.stream()
+//                   .map(mapper::toReadDTO)
+//                   .collect(Collectors.toList());
+//    }
+
+    public List<PetResponseDTO.Read> findByOwnerId(Long ownerId) {
+        List<Pet> pets = petRepository.findByOwnerId(ownerId);
 
         return pets.stream()
                    .map(mapper::toReadDTO)
