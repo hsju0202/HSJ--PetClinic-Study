@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import kr.co.hsj.petclinic.service.model.dto.request.VetRequestDTO;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.Set;
     column = @Column(name = "vet_id")
 )
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Vet extends BaseEntity {
 
     @Column(name = "first_name")
