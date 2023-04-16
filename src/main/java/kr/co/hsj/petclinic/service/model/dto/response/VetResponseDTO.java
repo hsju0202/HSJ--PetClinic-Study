@@ -1,10 +1,8 @@
 package kr.co.hsj.petclinic.service.model.dto.response;
 
-import kr.co.hsj.petclinic.persistence.entity.PetType;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.time.LocalDate;
 
 public class VetResponseDTO {
 
@@ -13,10 +11,9 @@ public class VetResponseDTO {
     public static class Read {
 
         private Long id;
-        private String ownerName;
-        private LocalDate birthDate;
-        private String name;
-        private PetType petType;
+        private String firstName;
+        private String lastName;
+        private List<String> specialties;
     }
 
 }
