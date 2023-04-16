@@ -38,8 +38,16 @@ public class VisitService {
         visitRepository.save(visit);
     }
 
-    public List<VisitResponseDTO.Read> find(VisitRequestDTO.Condition conditionDTO) {
-        List<Visit> visits = visitSearchRepository.find(conditionDTO);
+//    public List<VisitResponseDTO.Read> find(VisitRequestDTO.Condition conditionDTO) {
+//        List<Visit> visits = visitSearchRepository.find(conditionDTO);
+//
+//        return visits.stream()
+//                     .map(mapper::toReadDTO)
+//                     .collect(Collectors.toList());
+//    }
+
+    public List<VisitResponseDTO.Read> findByOwnerId(Long ownerId) {
+        List<Visit> visits = visitRepository.findByOwnerId(ownerId);
 
         return visits.stream()
                      .map(mapper::toReadDTO)
