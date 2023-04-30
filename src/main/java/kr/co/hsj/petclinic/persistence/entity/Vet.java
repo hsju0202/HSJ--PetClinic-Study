@@ -45,7 +45,10 @@ public class Vet extends BaseEntity {
     public void update(VetRequestDTO.Update updateDTO) {
         this.firstName = updateDTO.getFirstName();
         this.lastName = updateDTO.getLastName();
-        this.specialties = updateDTO.getSpecialties();
+        this.specialties = updateDTO.getSpecialties()
+                                    .stream()
+                                    .map(VetSpeciality::of)
+                                    .collect(Collectors.toSet());
     }
 
 }

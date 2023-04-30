@@ -1,23 +1,29 @@
 package kr.co.hsj.petclinic.service.model.dto.request;
 
-import kr.co.hsj.petclinic.persistence.entity.PetType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.List;
+import kr.co.hsj.petclinic.persistence.entity.PetType;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class PetRequestDTO {
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Condition {
 
         private List<Long> ids;
     }
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Create {
 
         private Long ownerId;
@@ -27,7 +33,9 @@ public class PetRequestDTO {
     }
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Update {
 
         private LocalDate birthDate;
