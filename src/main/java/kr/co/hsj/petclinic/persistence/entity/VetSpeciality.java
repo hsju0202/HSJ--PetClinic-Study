@@ -17,8 +17,8 @@ public enum VetSpeciality {
     public static VetSpeciality of(String vetSpecialty) {
 
         return Arrays.stream(VetSpeciality.values())
-                     .filter(type -> type.toString().equalsIgnoreCase(vetSpecialty))
-                     .findAny().orElseThrow(() -> new RuntimeException("Not Fount Vet Specialty"));
+                     .filter(specialty -> specialty.vetSpecialty.equalsIgnoreCase(vetSpecialty))
+                     .findAny().orElseThrow(() -> new RuntimeException("Not Found Vet Specialty"));
     }
 
 }

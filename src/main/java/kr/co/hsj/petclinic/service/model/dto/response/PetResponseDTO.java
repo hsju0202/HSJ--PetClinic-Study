@@ -1,15 +1,18 @@
 package kr.co.hsj.petclinic.service.model.dto.response;
 
-import kr.co.hsj.petclinic.persistence.entity.PetType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.time.LocalDate;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class PetResponseDTO {
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Read {
 
         private Long id;
@@ -17,7 +20,7 @@ public class PetResponseDTO {
         private String ownerLastName;
         private LocalDate birthDate;
         private String name;
-        private PetType petType;
+        private String type;
     }
 
 }

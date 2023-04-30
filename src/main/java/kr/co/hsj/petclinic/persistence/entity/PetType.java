@@ -20,8 +20,8 @@ public enum PetType {
     public static PetType of(String petType) {
 
         return Arrays.stream(PetType.values())
-                     .filter(type -> type.toString().equalsIgnoreCase(petType))
-                     .findAny().orElseThrow(() -> new RuntimeException("Not Fount Pet Type"));
+                     .filter(type -> type.petType.equalsIgnoreCase(petType))
+                     .findAny().orElseThrow(() -> new RuntimeException("Not Found Pet Type"));
     }
 
 }

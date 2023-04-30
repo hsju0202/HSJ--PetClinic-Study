@@ -1,23 +1,27 @@
 package kr.co.hsj.petclinic.service.model.dto.request;
 
-import kr.co.hsj.petclinic.persistence.entity.VetSpeciality;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
 import java.util.List;
-import java.util.Set;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class VetRequestDTO {
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Condition {
 
         private List<Long> ids;
     }
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Create {
 
         private String firstName;
@@ -26,12 +30,14 @@ public class VetRequestDTO {
     }
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Update {
 
-        private Long id;
         private String firstName;
         private String lastName;
-        private Set<VetSpeciality> specialties;
+        private List<String> specialties;
     }
+
 }

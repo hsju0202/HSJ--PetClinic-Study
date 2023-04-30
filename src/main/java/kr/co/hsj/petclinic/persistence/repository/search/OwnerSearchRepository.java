@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import org.springframework.util.StringUtils;
 
 @Repository
 @RequiredArgsConstructor
@@ -22,7 +23,10 @@ public class OwnerSearchRepository {
     public List<Owner> find(OwnerRequestDTO.Condition condition) {
         return queryFactory
             .selectFrom(owner)
-            .where(ownerIdIn(condition.getIds()))
+            .where(
+                ownerIdIn(condition.getIds()),
+                ownerFirstNameEq(condition.getFirstName())
+            )
             .fetch();
     }
 
@@ -32,5 +36,13 @@ public class OwnerSearchRepository {
         }
 
         return owner.id.in(ids);
+    }
+
+    private BooleanExpression ownerFirstNameEq(String firstName) {
+        if (!StringUtils.hasText(firstName)) {
+            return null;
+        }
+
+        return owner.firstName.eq(firstName);
     }
 }

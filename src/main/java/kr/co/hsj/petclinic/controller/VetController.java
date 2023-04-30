@@ -1,6 +1,10 @@
 package kr.co.hsj.petclinic.controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import kr.co.hsj.petclinic.infra.exception.EntityNotFoundException;
+import kr.co.hsj.petclinic.persistence.entity.VetSpeciality;
 import kr.co.hsj.petclinic.service.model.dto.request.VetRequestDTO;
 import kr.co.hsj.petclinic.service.service.VetService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +28,18 @@ public class VetController {
     public ResponseEntity<?> findVets(VetRequestDTO.Condition conditionDTO) {
         try {
             return ResponseEntity.ok(vetService.find(conditionDTO));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/vets/specialties")
+    public ResponseEntity<?> fetchSpecialties() {
+        try {
+            List<String> specialties = Arrays.stream(VetSpeciality.values())
+                                             .map(VetSpeciality::getVetSpecialty)
+                                             .collect(Collectors.toList());
+            return ResponseEntity.ok(specialties);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

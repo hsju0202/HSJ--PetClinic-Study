@@ -1,23 +1,28 @@
 package kr.co.hsj.petclinic.service.model.dto.request;
 
+import java.util.List;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 public class OwnerRequestDTO {
 
     @Getter
-    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Condition {
 
         private List<Long> ids;
+        private String firstName;
     }
 
     @Getter
     @Builder
-    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Create {
 
         private String address;
@@ -29,7 +34,8 @@ public class OwnerRequestDTO {
 
     @Getter
     @Builder
-    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Update {
 
         private String address;

@@ -2,6 +2,7 @@ package kr.co.hsj.petclinic.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.hsj.petclinic.service.model.dto.request.PetRequestDTO;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
     column = @Column(name = "pet_id")
 )
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pet extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
