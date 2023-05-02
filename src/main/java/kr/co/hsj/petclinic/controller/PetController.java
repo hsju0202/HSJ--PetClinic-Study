@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,19 +24,10 @@ public class PetController {
 
     private final PetService petService;
 
-//    @GetMapping("/pets")
-//    public ResponseEntity<?> findPets(PetRequestDTO.Condition conditionDTO) {
-//        try {
-//            return ResponseEntity.ok(petService.find(conditionDTO));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//        }
-//    }
-
     @GetMapping("/pets")
-    public ResponseEntity<?> findPets(@RequestParam Long ownerId) {
+    public ResponseEntity<?> findPets(PetRequestDTO.Condition conditionDTO) {
         try {
-            return ResponseEntity.ok(petService.findByOwnerId(ownerId));
+            return ResponseEntity.ok(petService.find(conditionDTO));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

@@ -1,16 +1,15 @@
 package kr.co.hsj.petclinic.persistence.repository.search;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
+import static kr.co.hsj.petclinic.infra.util.QueryUtils.filter;
+
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
 import kr.co.hsj.petclinic.persistence.entity.Pet;
 import kr.co.hsj.petclinic.persistence.entity.QOwner;
 import kr.co.hsj.petclinic.persistence.entity.QPet;
 import kr.co.hsj.petclinic.service.model.dto.request.PetRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,15 +24,11 @@ public class PetSearchRepository {
         return queryFactory
             .selectFrom(pet)
             .join(owner).fetchJoin()
-            .where(petIdIn(condition.getIds()))
+            .where(
+                filter(condition.getIds(), pet.id::in),
+                filter(condition.getOwnerId(), owner.id::in)
+            )
             .fetch();
     }
 
-    private BooleanExpression petIdIn(List<Long> ids) {
-        if (CollectionUtils.isEmpty(ids)) {
-            return null;
-        }
-
-        return pet.id.in(ids);
-    }
 }
