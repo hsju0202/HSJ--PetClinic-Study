@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 public class OwnerRequestDTO {
 
     @Getter
     @Builder
+    @ToString
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Condition {
@@ -21,6 +23,7 @@ public class OwnerRequestDTO {
 
     @Getter
     @Builder
+    @ToString
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Create {
@@ -34,6 +37,7 @@ public class OwnerRequestDTO {
 
     @Getter
     @Builder
+    @ToString
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Update {

@@ -8,20 +8,24 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 public class PetRequestDTO {
 
     @Getter
     @Builder
+    @ToString
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Condition {
 
         private List<Long> ids;
+        private Long ownerId;
     }
 
     @Getter
     @Builder
+    @ToString
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Create {
@@ -34,6 +38,7 @@ public class PetRequestDTO {
 
     @Getter
     @Builder
+    @ToString
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Update {

@@ -41,16 +41,8 @@ public class PetService {
         petRepository.save(pet);
     }
 
-//    public List<PetResponseDTO.Read> find(PetRequestDTO.Condition conditionDTO) {
-//        List<Pet> pets = petSearchRepository.find(conditionDTO);
-//
-//        return pets.stream()
-//                   .map(mapper::toReadDTO)
-//                   .collect(Collectors.toList());
-//    }
-
-    public List<PetResponseDTO.Read> findByOwnerId(Long ownerId) {
-        List<Pet> pets = petRepository.findByOwnerId(ownerId);
+    public List<PetResponseDTO.Read> find(PetRequestDTO.Condition conditionDTO) {
+        List<Pet> pets = petSearchRepository.find(conditionDTO);
 
         return pets.stream()
                    .map(mapper::toReadDTO)

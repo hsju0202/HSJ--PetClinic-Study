@@ -1,5 +1,7 @@
 package kr.co.hsj.petclinic.persistence.repository.search;
 
+import static kr.co.hsj.petclinic.infra.util.QueryUtils.filter;
+
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.hsj.petclinic.persistence.entity.QVet;
@@ -22,7 +24,9 @@ public class VetSearchRepository {
     public List<Vet> find(VetRequestDTO.Condition condition) {
         return queryFactory
             .selectFrom(vet)
-            .where(vetIdIn(condition.getIds()))
+            .where(
+                filter(condition.getIds(), vet.id::in)
+            )
             .fetch();
     }
 
